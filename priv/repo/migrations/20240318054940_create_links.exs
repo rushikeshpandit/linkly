@@ -3,11 +3,11 @@ defmodule Linkly.Repo.Migrations.CreateLinks do
 
   def change do
     create table(:links) do
-      add(:url, :string)
+      add :url, :string
 
       timestamps()
     end
 
-    create(unique_index(:links, [:url]))
+    create unique_index(:links, [:url])
   end
 end
