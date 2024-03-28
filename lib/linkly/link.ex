@@ -1,5 +1,6 @@
 defmodule Linkly.Link do
   use Ecto.Schema
+  import Ecto.Changeset
   alias Linkly.{Bookmark, LinkTag, Tag, User, Link}
 
   schema "links" do
@@ -10,5 +11,12 @@ defmodule Linkly.Link do
     many_to_many(:users, User, join_through: LinkTag)
 
     timestamps()
+  end
+
+  def changeset(%Link{} = link, attrs) do
+    link
+    |> cast(attrs, [:url])
+    |> validate_required([:url])
+    |> unique_constraint(:url)
   end
 end
